@@ -5,17 +5,22 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MainActivity extends AppCompatActivity {
     List<NumbersView> arrayList = new ArrayList<NumbersView>();
     NumbersViewAdapter aAdpt;
     Context context;
-//    private Integer[] images = {
+    //    private Integer[] images = {
 //            R.drawable.sample_7, R.drawable.sample_2, R.drawable.sample_3,
 //            R.drawable.sample_4, R.drawable.sample_5,
 //            R.drawable.sample_6, R.drawable.sample_7,
@@ -50,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
         // add all the values from 1 to 15 to the arrayList
-         //the items are of the type NumbersView
+        //the items are of the type NumbersView
 
         NumbersView n = new NumbersView("", "");
         arrayList.add(new NumbersView("1", "One"));
@@ -87,5 +92,4 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 }
-
 

@@ -16,7 +16,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NumbersViewAdapter extends ArrayAdapter<com.example.check.NumbersView> {
+public  class NumbersViewAdapter extends ArrayAdapter<com.example.check.NumbersView> {
 
     // invoke the suitable constructor of the ArrayAdapter class
     public NumbersViewAdapter(@NonNull List<NumbersView> context, MainActivity arrayList) {
@@ -45,7 +45,7 @@ public class NumbersViewAdapter extends ArrayAdapter<com.example.check.NumbersVi
         ImageView numbersImage = currentItemView.findViewById(R.id.imageView);
         assert currentNumberPosition != null;
         for(int i=0;i<position;i++) {
-            if (position % 2 == 0) {
+            if (position <=4 && position >=9) {
                 //even
                 numbersImage.setImageResource(R.drawable.geeks_logo);
                 currentItemView.setBackgroundColor(getContext().getResources().getColor(android.R.color.holo_green_dark));
@@ -88,4 +88,3 @@ public class NumbersViewAdapter extends ArrayAdapter<com.example.check.NumbersVi
         return currentItemView;
     }
 }
-
