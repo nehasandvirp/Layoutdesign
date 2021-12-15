@@ -1,13 +1,20 @@
 package com.example.check;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.check.NumbersView;
+import com.example.check.NumbersViewAdapter;
+import com.example.check.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,39 +64,72 @@ public class MainActivity extends AppCompatActivity {
         // add all the values from 1 to 15 to the arrayList
         //the items are of the type NumbersView
 
-        NumbersView n = new NumbersView("", "");
-        arrayList.add(new NumbersView("1", "One"));
-        arrayList.add(new NumbersView( "2", "Two"));
-        arrayList.add(new NumbersView("3", "Three"));
-        arrayList.add(new NumbersView("4", "Four"));
-        arrayList.add(new NumbersView("5", "Five"));
-        arrayList.add(new NumbersView("6", "Six"));
-        arrayList.add(new NumbersView("7", "Seven"));
-        arrayList.add(new NumbersView("8", "Eight"));
-        arrayList.add(new NumbersView("9", "Nine"));
-        arrayList.add(new NumbersView("10", "Ten"));
-        arrayList.add(new NumbersView("11", "Eleven"));
-        arrayList.add(new NumbersView("12", "Twelve"));
-        arrayList.add(new NumbersView("13", "Thirteen"));
-        arrayList.add(new NumbersView("14", "Fourteen"));
-        arrayList.add(new NumbersView("15", "Fifteen"));
-
-        // Now create the instance of the NumebrsViewAdapter and pass
-        // the context and arrayList created above
-        NumbersViewAdapter numbersArrayAdapter = new NumbersViewAdapter(arrayList, this);
+//        NumbersView n = new NumbersView("", "");
+//        arrayList.add(new NumbersView("1", "One"));
+//        arrayList.add(new NumbersView( "2", "Two"));
+//        arrayList.add(new NumbersView("3", "Three"));
+//        arrayList.add(new NumbersView("4", "Four"));
+//        arrayList.add(new NumbersView("5", "Five"));
+//        arrayList.add(new NumbersView("6", "Six"));
+//        arrayList.add(new NumbersView("7", "Seven"));
+//        arrayList.add(new NumbersView("8", "Eight"));
+//        arrayList.add(new NumbersView("9", "Nine"));
+//        arrayList.add(new NumbersView("10", "Ten"));
+//        arrayList.add(new NumbersView("11", "Eleven"));
+//        arrayList.add(new NumbersView("12", "Twelve"));
+//        arrayList.add(new NumbersView("13", "Thirteen"));
+//        arrayList.add(new NumbersView("14", "Fourteen"));
+//        arrayList.add(new NumbersView("15", "Fifteen"));
+//
+//        // Now create the instance of the NumebrsViewAdapter and pass
+//        // the context and arrayList created above
+//        NumbersViewAdapter numbersArrayAdapter = new NumbersViewAdapter(arrayList, this);
 
         // create the instance of the ListView to set the numbersViewAdapter
         ListView numbersListView = findViewById(R.id.listView);
 
-        // set the numbersViewAdapter for ListView
-        numbersListView.setAdapter(numbersArrayAdapter);
+//        // set the numbersViewAdapter for ListView
+//        numbersListView.setAdapter(numbersArrayAdapter);
+//
+//        numbersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Log.d("error","errortolaunchednewactivity");
+//                Toast.makeText(context,"position: "+position,Toast.LENGTH_LONG).show();
+//
+//                    Intent intent = new Intent(MainActivity.this,ShowI.class);
+//                    startActivity(intent);
+//
+//
+//            }
+//        });
 
-        numbersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        Call<List<NumbersView>> call = RetrofitClient.getInstance().getMyApi().getHeroes();
+        call.enqueue(new Callback<List<NumbersView>>() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(context,"position: "+position,Toast.LENGTH_LONG).show();
+            public void onResponse(Call<List<NumbersView>> call, Response<List<NumbersView>> response) {
+                List<NumbersView> heroList = response.body();
+
+                Log.d("list size: ", String.valueOf(heroList.size()));
+                NumbersViewAdapter numbersArrayAdapter = new NumbersViewAdapter(heroList, MainActivity.this);
+                numbersListView.setAdapter(numbersArrayAdapter);
+                //Creating an String array for the ListView
+//                String[] heroes = new String[heroList.size()];
+//
+//
+//                //looping through all the heroes and inserting the names inside the string array
+//                for (int i = 0; i < heroList.size(); i++) {
+//                    heroes[i] = heroList.get(i).getNumbersInText() ;
+//                }
+    }
+            @Override
+            public void onFailure(Call<List<NumbersView>> call, Throwable t) {
+                Log.d("error: ",t.getMessage());
+                t.printStackTrace();
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+
     }
 }
-

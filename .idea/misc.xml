@@ -4,7 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/button_effect.xml" value="0.129" />
-        <entry key="app/src/main/res/layout/custom_list_view.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_about.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.19538461538461538" />
+        <entry key="app/src/main/res/layout/activity_show_details.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_show_i.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/custom_list_view.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/image_view.xml" value="0.22" />
       </map>
     </option>
   </component>

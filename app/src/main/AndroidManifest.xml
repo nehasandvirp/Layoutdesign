@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.check">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,6 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Check">
+        <activity
+            android:name=".ShowDetails"
+            android:exported="false" />
+        <activity
+            android:name=".ShowI"
+            android:exported="false" />
+        <activity
+            android:name=".About"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
